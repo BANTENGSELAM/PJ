@@ -22,11 +22,11 @@
                             </form>
                             </div>
                             <div class="col">
-                                {{-- <form action="/removesubtasks/{{ $subTask->id }}">
+                                <form action="{{ route('subtasks.destroy', $subTask->id)}}" method="POST">
                                     @csrf
                                     @method("delete")
-                                </form> --}}
-                                <a href="/removesubtasks/{{ $subTask->id }}" class="btn btn-danger" type="button">Hapus</a>
+                                    <button class="btn btn-danger" type="submit">Hapus</button>
+                                </form>
                             </div>
                         </div>
                     </div>

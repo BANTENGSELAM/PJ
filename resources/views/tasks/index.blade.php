@@ -10,10 +10,10 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a>
                 <div>
-                    {{-- <form action="/removetasks/{{$task->id}}" method="POST"> --}}
+                    <form action="/removetasks/{{$task->id}}" method="POST">
                     <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    {{-- @csrf --}}
-                    {{-- @method("delete") --}}
+                    @csrf
+                    @method("delete")
                     <a class="btn btn-danger btn-sm" type="button" href="/removetasks/{{ $task->id }}">Delete</a>
                     </form>
                     </div>
