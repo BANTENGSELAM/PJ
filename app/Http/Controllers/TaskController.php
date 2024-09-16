@@ -17,16 +17,18 @@ class TaskController extends Controller
         'assigned_to' => 'nullable|exists:users,id',
     ]);
 
-    $project->tasks()->create($request->all());
+    Project::find($project)->first()->tasks()->create($request->all());
 
     return redirect()->route('tasks.show', $project->id)->with('success', 'Task created successfully');
 
     
 }
 
-    public function Index()  {
-        return view('tasks.index');
+    public function Index($project)  {
+        $p = Project::find($project);
+        return view('tasks.index', ['project' => $p, 'tasks' => $p->tasks()->get()]);
     }
+
 
     public function create(Project $project)
     {
@@ -55,5 +57,11 @@ class TaskController extends Controller
         $task->update($request->only('title', 'description'));
 
         return redirect()->route('tasks.show', $task->id)->with('success', 'Task updated successfully.');
+    }
+
+    public function destroy ($id){
+        $data = Task::findOrFail($id);
+        $data->delete();
+        return redirect()->route('tasks.index', $id);
     }
 }

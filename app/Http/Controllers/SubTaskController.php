@@ -20,7 +20,7 @@ class SubTaskController extends Controller
         $subTask->task_id = $task->id;
         $subTask->save();
 
-        $task->subTasks()->create($request->only('title'));
+        // $task->subTasks()->create($request->only('title'));
 
         return redirect()->route('tasks.show', $task->id)->with('success', 'Sub-task created successfully.');
     }
@@ -56,5 +56,12 @@ class SubTaskController extends Controller
     public function edit(SubTask $subTask)
     {
         return view('subtasks.edit', compact('subTask'));
+    }
+
+    public function destroy ($id){
+        $data = SubTask::findOrFail($id);
+        $taskid = $data->task_id;
+        $data->delete();
+        return redirect()->route('tasks.show', $taskid);
     }
 }

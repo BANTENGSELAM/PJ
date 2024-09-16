@@ -10,9 +10,9 @@
             <a href="{{ route('projects.show', $project->id) }}" class="list-group-item list-group-item-action">
                 {{ $project->name }}
                 <small class="d-block text-muted">{{ $project->description }}</small>
-                
             </a>
         @endforeach
+        
     </div>
 </div>
 @endsection

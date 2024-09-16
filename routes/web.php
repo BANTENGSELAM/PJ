@@ -31,10 +31,11 @@ Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show')
 Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+// Route::get('/removetasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
 Route::get('/tasks/{task}/subtasks', [SubTaskController::class, 'index'])->name('subtasks.index');
 Route::get('/tasks/{task}/subtasks/create', [SubTaskController::class, 'create'])->name('subtasks.create');
 Route::post('/tasks/{task}/subtasks', [SubTaskController::class, 'store'])->name('subtasks.store');
 Route::get('/subtasks/{subtask}/edit', [SubTaskController::class, 'edit'])->name('subtasks.edit');
 Route::put('/subtasks/{subTask}', [SubTaskController::class, 'update'])->name('subtasks.update');
-Route::delete('/subtasks/{subtask}', [SubTaskController::class, 'destroy'])->name('subtasks.destroy');
+Route::delete('/removesubtasks/{id}', [SubTaskController::class, 'destroy'])->name('subtasks.destroy');

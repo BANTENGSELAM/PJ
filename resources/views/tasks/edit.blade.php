@@ -22,6 +22,6 @@
 
         <button type="submit" class="btn btn-primary">Update Task</button>
     </form>
-    <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-secondary mt-3">Back to Task</a>
+    <a href="{{ route('tasks.index', $task->id) }}" class="btn btn-secondary mt-3">Back to Task List</a>
 </div>
 @endsection
