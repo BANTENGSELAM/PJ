@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -14,19 +15,33 @@ class TaskController extends Controller
     $request->validate([
         'title' => 'required',
         'description' => 'nullable',
+        'image' => 'required',
         'assigned_to' => 'nullable|exists:users,id',
     ]);
 
-    Project::find($project)->first()->tasks()->create($request->all());
+    $imagePath = $this->storeImage($request->file('image'));
+    $d = Project::find($project)->first()->tasks()->create([
+        'user_id' => Auth::id(),
+        'title' => $request->title,
+        'description' => $request->description,
+        'assigned_to' => $request->assigned_to,
+        'image' => $imagePath
+    ]);
 
-    return redirect()->route('tasks.show', $project->id)->with('success', 'Task created successfully');
+        
+        return redirect()->route('tasks.show', $d->id)->with('success', 'Task created successfully');
 
-    
 }
+
+    public function storeImage($file):string{
+        $fileName = rand() . $file->getClientOriginalName();
+        $file->move('uploads', $fileName);
+        return "/uploads/" . $fileName;
+    }
 
     public function Index($project)  {
         $p = Project::find($project);
-        return view('tasks.index', ['project' => $p, 'tasks' => $p->tasks()->get()]);
+        return view('tasks.index', compact('p'), ['project' => $p, 'tasks' => $p->tasks()->get()]);
     }
 
 
@@ -62,6 +77,6 @@ class TaskController extends Controller
     public function destroy ($id){
         $data = Task::findOrFail($id);
         $data->delete();
-        return redirect()->route('tasks.index', $id);
+        return redirect()->back();
     }
 }

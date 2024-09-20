@@ -2,14 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['project_id', 'title', 'description', 'assigned_to','user_id'];
+    protected $guarded = [];
+    
+       
+    
+
+    protected $fillable = ['project_id', 'title', 'description', 'assigned_to','user_id', 'image'];
 
     // Relasi ke Project (satu task dimiliki oleh satu project)
     public function project()
@@ -18,9 +25,10 @@ class Task extends Model
     }
 
     // Relasi ke User (satu task bisa ditugaskan ke satu user)
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'assigned_to');
+        return $this->belongsTo(User::class);
     }
 
     // Relasi ke SubTask (satu task bisa memiliki banyak sub-task)

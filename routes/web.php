@@ -8,7 +8,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SubTaskController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();

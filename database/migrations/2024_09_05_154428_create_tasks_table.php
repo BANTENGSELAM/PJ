@@ -13,9 +13,11 @@ return new class extends Migration
 {
     Schema::create('tasks', function (Blueprint $table) {
         $table->id();
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');  // Relasi ke tabel projects
         $table->foreignId('project_id')->constrained()->onDelete('cascade');  // Relasi ke tabel projects
         $table->string('title');
-        $table->text('description')->nullable();
+        $table->string('image');
+        $table->text('description');
         $table->foreignId('assigned_to')->nullable()->constrained('users')->onDelete('set null');  // Penugasan ke user
         $table->timestamps();
     });

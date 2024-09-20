@@ -1,20 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>BUAT PROYEK BARU</h1>
+<div class="container" style="max-width: 600px;">
+    <!-- Title -->
+    <h1 class="text-center fw-bold mb-4" style="color: #071952;">Buat Proyek Baru</h1>
     
-    <form action="{{ route('projects.store') }}" method="POST">
+    <!-- Form -->
+    <form action="{{ route('projects.store') }}" method="POST" class="p-4 shadow-sm" style="background-color: #f8f9fa; border-radius: 10px;">
         @csrf
-        <div class="form-group">
-            <label for="name">NAMA PROYEK</label>
-            <input type="text" name="name" id="name" class="form-control" required>
+
+        <!-- Project Name -->
+        <div class="form-group mb-3">
+            <label for="name" class="fw-semibold" style="color: #071952;">Nama Proyek</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Masukkan nama proyek" required style="border: 1px solid #ced4da; border-radius: 5px;">
         </div>
-        <div class="form-group mt-3">
-            <label for="description">DESKRIPSI PROYEK</label>
-            <textarea name="description" id="description" class="form-control"></textarea>
+
+        <!-- Project Description -->
+        <div class="form-group mb-4">
+            <label for="description" class="fw-semibold" style="color: #071952;">Deskripsi Proyek</label>
+            <textarea name="description" id="description" class="form-control" rows="4" placeholder="Masukkan deskripsi proyek" style="border: 1px solid #ced4da; border-radius: 5px;"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">BUAT</button>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+            <button type="submit" class="btn text-white fw-semibold" style="background-color: #071952; border-radius: 5px; padding: 10px 0;">Buat Proyek</button>
+        </div>
     </form>
 </div>
 @endsection

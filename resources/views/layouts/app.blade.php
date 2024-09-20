@@ -18,16 +18,25 @@
         * 
         {
             font-family: 'Lunasima';
+
+        }
+
+        .bg{
+            background-color: #071952;
+        }
+
+        .gray{
+            background-color: #e9ecef;
         }
     </style>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body style="background-color: #092635">
+<body class="gray">
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #1B4242">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}" style="color: aliceblue">
+        <nav class="navbar navbar-expand-md shadow-sm bg" >
+            <div class="container" >
+                <a class="navbar-brand text-white" href="{{ url('/') }}" >
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -45,26 +54,26 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item" style="color: aliceblue">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}" >{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}" >{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: aliceblue">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre >
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end " style="background-color: #1B4242" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-end "  aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" style="color: aliceblue"  >
+                                                     document.getElementById('logout-form').submit();"   >
                                         {{ __('Logout') }}
                                     </a>
 
