@@ -36,14 +36,26 @@
                     @forelse ($task->subTasks as $subTask)
                         <li class="list-group-item d-flex justify-content-between align-items-center position-relative">
                             <div class="form-check">
-                                <form action="{{ route('subtasks.update', ['task' => $task->id, 'subTask' => $subTask->id]) }}" method="POST">
+                                <form action="{{ route('subtasks.update', ['task' => $task->id, 'subTask' => $subTask->id]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
+                                    
+                                    <!-- Checkbox -->
                                     <input type="checkbox" name="completed" class="form-check-input me-2" 
-                                        {{ $subTask->completed ? 'checked' : '' }} 
+                                        {{ $subTask->completed || $subTask->documentation ? 'checked' : '' }} 
                                         onchange="this.form.submit(); updateProgress();">
                                     <label class="form-check-label" style="font-size: 1.05rem;">{{ $subTask->title }}</label>
+
+                                    <!-- Input untuk Dokumentasi -->
+                                    <input type="file" name="documentation" class="form-control mt-2" onchange="this.form.submit();" accept="image/*">
                                 </form>
+
+                                <!-- Tampilkan link untuk melihat dokumentasi jika sudah ada -->
+                                @if($subTask->documentation)
+                                    <div class="mt-2">
+                                        <a href="{{ asset('storage/' . $subTask->documentation) }}" target="_blank" class="btn btn-link p-0" style="text-decoration: underline;">Lihat Dokumentasi</a>
+                                    </div>
+                                @endif
                             </div>
 
                             <!-- Tombol Hapus -->
