@@ -33,6 +33,9 @@ Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.upda
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 // Route::get('/removetasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
+
+
+
 Route::get('/tasks/{task}/subtasks', [SubTaskController::class, 'index'])->name('subtasks.index');
 Route::get('/tasks/{task}/subtasks/create', [SubTaskController::class, 'create'])->name('subtasks.create');
 Route::post('/tasks/{task}/subtasks', [SubTaskController::class, 'store'])->name('subtasks.store');
