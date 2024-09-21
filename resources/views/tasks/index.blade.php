@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <!-- Judul -->
-    <h1 class="fw-bold mb-4">Daftar Tugas</h1>
+<div class="container py-4">
+    <!-- Judul Daftar Tugas -->
+    <h1 class="fw-bold mb-4" style="color: #071952;">Daftar Tugas</h1>
 
     <!-- Tombol Buat Tugas Baru -->
-    <a href="{{ route('tasks.create', $project->id) }}" class="btn btn-primary mb-4" style="border-radius: 8px;">Buat Tugas Baru</a>
+    <a href="{{ route('tasks.create', $project->id) }}" class="btn text-white fw-semibold mb-4" style="background-color: #071952; border-radius: 8px;">Buat Tugas Baru</a>
 
     <!-- Daftar Tugas -->
     <ul class="list-group shadow-sm">
         @foreach ($tasks as $task)
-            <li class="list-group-item d-flex justify-content-between align-items-center mb-2 shadow-sm" style="border-radius: 8px;">
+            <li class="list-group-item d-flex justify-content-between align-items-center mb-2 shadow-sm" style="border-radius: 8px; background-color: #e9ecef;">
                 <div class="fw-semibold">
-                    <a href="{{ route('tasks.show', $task->id) }}" class="text-decoration-none" style="font-size: 1.1rem;">{{ $task->title }}</a>
+                    <a href="{{ route('tasks.show', $task->id) }}" class="text-decoration-none" style="font-size: 1.1rem; color: #071952;">{{ $task->title }}</a>
                 </div>
                 
                 <div>

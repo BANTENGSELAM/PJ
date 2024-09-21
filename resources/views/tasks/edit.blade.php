@@ -1,28 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Ubah Tugas</h1>
-    <form action="{{ route('tasks.update', $task->id) }}" method="POST">
+<div class="container py-4" style="max-width: 700px;">
+    <!-- Judul Halaman -->
+    <h1 class="text-center fw-bold mb-4" style="color: #071952;">Ubah Bidang Tugas</h1>
+
+    <!-- Form Ubah Tugas -->
+    <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="shadow-sm p-4" style="background-color: #f8f9fa; border-radius: 10px;">
         @csrf
         @method('PUT')
 
-        <div class="form-group">
-            <label for="title">Judul</label>
-            <input type="text" id="title" name="title" class="form-control" value="{{ old('title', $task->title) }}" required>
+        <!-- Input Judul -->
+        <div class="form-group mb-3">
+            <label for="title" class="fw-semibold" style="color: #071952;">Judul</label>
+            <input type="text" id="title" name="title" class="form-control" value="{{ old('title', $task->title) }}" required style="border: 1px solid #ced4da; border-radius: 5px;">
             @error('title')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
-        <div class="form-group">
-            <label for="description">Deskripsi</label>
-            <textarea id="description" name="description" class="form-control">{{ old('description', $task->description) }}</textarea>
+        <!-- Input Deskripsi -->
+        <div class="form-group mb-3">
+            <label for="description" class="fw-semibold" style="color: #071952;">Deskripsi</label>
+            <textarea id="description" name="description" class="form-control" rows="4" style="border: 1px solid #ced4da; border-radius: 5px;">{{ old('description', $task->description) }}</textarea>
         </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Perbarui Tugas</button>
+
+        <!-- Tombol Submit -->
+        <div class="d-grid mb-3">
+            <button type="submit" class="btn text-white fw-semibold" style="background-color: #071952; border-radius: 8px; padding: 10px 0;">Perbarui Bidang Tugas</button>
+        </div>
     </form>
-    <a href="{{route('tasks.index', $task->id)}}" class="btn btn-secondary mt-3">Kembali Ke Daftar Tugas</a>
-    
+
+    <!-- Tombol Kembali -->
+    <a href="{{route('tasks.index', $task->id)}}" class="btn btn-secondary mt-3 d-block text-center" style="border-radius: 8px; padding: 10px 0;">Kembali Ke Daftar Tugas</a>
 </div>
 @endsection

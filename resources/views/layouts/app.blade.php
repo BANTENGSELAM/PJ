@@ -34,11 +34,17 @@
 </head>
 <body class="gray">
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm bg" >
+        <nav class="navbar navbar-expand-md shadow-sm" style="background: linear-gradient(135deg, rgba(7, 25, 82, 0.85), rgba(113, 132, 240, 0.85));" >
             <div class="container" >
+                @guest
                 <a class="navbar-brand text-white" href="{{ url('/') }}" >
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                    @else
+                    <a class="navbar-brand text-white" href="{{ url('/projects') }}" >
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                    @endguest
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
