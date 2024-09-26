@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('task_id')->constrained()->onDelete('cascade');  // Relasi ke tabel tasks
             $table->string('title');
             $table->boolean('is_completed')->default(false);  // Status selesai atau tidak
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container py-4">
     <!-- Judul Daftar Tugas -->
-    <h1 class="fw-bold mb-4" style="color: #071952;">Daftar Tugas</h1>
+    <h1 class="fw-bold mb-4 text-primary">{{ $project->name }} - Daftar Tugas</h1>
 
     <!-- Tombol Buat Tugas Baru -->
     <a href="{{ route('tasks.create', $project->id) }}" class="btn text-white fw-semibold mb-4" style="background-color: #071952; border-radius: 8px;">Buat Tugas Baru</a>
@@ -11,12 +11,12 @@
     <!-- Daftar Tugas -->
     <ul class="list-group shadow-sm">
         @foreach ($tasks as $task)
-            <li class="list-group-item d-flex justify-content-between align-items-center mb-2 shadow-sm" style="border-radius: 8px; background-color: #e9ecef;">
+            <li class="list-group-item d-flex justify-content-between align-items-center mb-2" style="border-radius: 8px; background-color: #e9ecef;">
                 <div class="fw-semibold">
                     <a href="{{ route('tasks.show', $task->id) }}" class="text-decoration-none" style="font-size: 1.1rem; color: #071952;">{{ $task->title }}</a>
                 </div>
                 
-                <div>
+                <div class="d-flex">
                     <!-- Tombol Ubah -->
                     <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-warning btn-sm me-2" style="border-radius: 8px;">Ubah</a>
 
@@ -32,6 +32,8 @@
     </ul>
 
     <!-- Tombol Kembali Ke Proyek -->
-    <a href="{{ route('projects.show', $project->id) }}" class="btn btn-secondary mt-4" style="border-radius: 8px;">Kembali Ke Proyek</a>
+    <div class="mt-4">
+        <a href="{{ route('projects.show', $project->id) }}" class="btn btn-secondary" style="border-radius: 8px;">Kembali Ke Proyek</a>
+    </div>
 </div>
 @endsection

@@ -10,11 +10,11 @@ class SubTask extends Model
     use HasFactory;
 
     // Tentukan field yang bisa diisi (fillable)
-    protected $fillable = ['title', 'task_id', 'completed'];
+    protected $guarded = [];
 
     // Casting untuk memastikan kolom 'completed' diperlakukan sebagai boolean
     protected $casts = [
-        'completed' => 'boolean',
+        'is_completed' => 'boolean',
     ];
 
     // Relasi ke Task (satu sub-task dimiliki oleh satu task)

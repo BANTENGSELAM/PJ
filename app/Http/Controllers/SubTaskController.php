@@ -36,18 +36,31 @@ class SubTaskController extends Controller
         'completed' => 'boolean',
     ];
 
-    public function update(Request $request, SubTask $subTask)
+    public function update(Request $request, $subTask)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            // 'title' => 'required|string|max:255',
+            'image' => 'required'
         ]);
 
-        $subTask->update([
-            'completed' => $request->has('completed'),
-            'title' => $request->input('title'),
+        $imagePath = $this->storeImage($request->file('image'));
+
+        $d = SubTask::find($subTask);
+        $d->update([
+            'is_completed' => $request->has('completed'),
+            'completed'  => $request->has('completed'),
+            // 'title' => $request->input('title'),
+            'image' => $imagePath
         ]);
 
-        return redirect()->route('tasks.show', $subTask->task_id)->with('success', 'Sub-task updated successfully.');
+        return redirect()->route('tasks.show', $d->task_id)->with('success', 'Sub-task updated successfully.');
+    }
+
+
+    public function storeImage($file):string{
+        $fileName = rand() . $file->getClientOriginalName();
+        $file->move('uploads', $fileName);
+        return "/uploads/" . $fileName;
     }
 
     public function edit(SubTask $subTask)

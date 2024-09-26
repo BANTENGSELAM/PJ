@@ -4,7 +4,7 @@
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="fw-bold mb-4" style="color: #071952;">{{ __('Register') }}</h1>
+            <h1 class="fw-bold mb-4" style="color: #071952;"><center>{{ __('Register') }}</center></h1>
             <div class="card shadow-sm">
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

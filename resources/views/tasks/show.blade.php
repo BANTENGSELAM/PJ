@@ -3,21 +3,28 @@
 @section('content')
 <div class="container py-4">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-12 col-md-6">
             <h1 class="fw-bold mb-4" style="color: #071952;">{{ $task->title }}</h1>
-            <img src="{{ $task->image }}" alt="foto" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;" class="mb-3 shadow-sm">
+            <img src="{{ $task->image }}" alt="foto" 
+                 class="img-fluid mb-3" style="height: 200px; object-fit: cover; border-radius: 10px;">
+
             <p class="text-muted mb-4" style="font-size: 1.1rem;">Deskripsi: {{ $task->description }}</p>
-            <div class="mt-3 d-flex">
-                <a href="{{ route('subtasks.create', $task->id) }}" class="btn text-white me-2" style="background-color: #071952; border-radius: 8px;">Tambah Sub-Tugas Baru</a>
-                <a href="{{ route('tasks.edit', $task->id) }}" class="btn text-white me-2" style="background-color: #f39c12; border-radius: 8px;">Ubah Tugas</a>
-                <a href="{{ route('tasks.index', ['project' => $task->project_id]) }}" class="btn text-white" style="background-color: #7f8c8d; border-radius: 8px;">Daftar Tugas</a>
+
+            <div class="mt-3 d-flex flex-column flex-sm-row">
+                <a href="{{ route('subtasks.create', $task->id) }}" class="btn text-white me-2 mb-2 mb-sm-0" 
+                   style="background-color: #071952; border-radius: 8px;">Tambah Sub-Tugas Baru</a>
+                <a href="{{ route('tasks.edit', $task->id) }}" class="btn text-white me-2 mb-2 mb-sm-0" 
+                   style="background-color: #f39c12; border-radius: 8px;">Ubah Tugas</a>
+                <a href="{{ route('tasks.index', ['project' => $task->project_id]) }}" class="btn text-white" 
+                   style="background-color: #7f8c8d; border-radius: 8px;">Daftar Tugas</a>
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-12 col-md-6">
             <div class="w-100 mb-3">
                 <h5 class="fw-bold" style="color: #071952;">Progres Pekerjaan</h5>
-                <div class="progress" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" style="height: 1.5rem; border-radius: 10px;">
+                <div class="progress" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" 
+                     style="height: 1.5rem; border-radius: 10px;">
                     <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
                          style="width: 0%; background-color: #071952; transition: width 0.4s ease-in-out;">
                     </div>
@@ -26,25 +33,31 @@
 
             <div>
                 <h5 class="fw-bold" style="color: #071952;">Sub-Tugas</h5>
-                <ul class="list-group shadow-sm" id="subTaskContainer" style="max-height: 400px; overflow-y: auto; border-radius: 10px;">
+                <ul class="list-group shadow-sm" id="subTaskContainer" 
+                    style="max-height: 400px; overflow-y: auto; border-radius: 10px;">
                     @forelse ($task->subTasks as $subTask)
                         <li class="list-group-item d-flex justify-content-between align-items-center position-relative">
                             <div class="form-check">
-                                <form action="{{ route('subtasks.update', ['task' => $task->id, 'subTask' => $subTask->id]) }}" method="POST">
+                                <form action="{{ route('subtasks.update', ['task' => $task->id, 'subTask' => $subTask->id]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <input type="checkbox" name="completed" class="form-check-input me-2" 
-                                        {{ $subTask->completed ? 'checked' : '' }} 
-                                        onchange="this.form.submit(); updateProgress();">
+                                           id="n{{$subTask->id}}" {{ $subTask->is_completed ? 'checked' : '' }}>
                                     <label class="form-check-label" style="font-size: 1.05rem;">{{ $subTask->title }}</label>
+                                    <input type="file" name="image" id="image" 
+                                           onchange="document.getElementById('n{{$subTask->id}}').checked = true; this.form.submit(); updateProgress();">
                                 </form>
                             </div>
-                            <form action="{{ route('subtasks.destroy', $subTask->id) }}" method="POST" class="position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">
+                            <form action="{{ route('subtasks.destroy', $subTask->id) }}" method="POST" 
+                                  class="position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger btn-sm" type="submit" style="border-radius: 6px;">Hapus</button>
-                                <a href="#" class="btn btn-sm text-white me-2" 
-                                    style="border-radius: 8px; background-color: #071952;"> Lihat</a>
+                                @if($subTask->image)
+                                    <a href="{{$subTask->image}}" class="btn btn-sm text-white me-2" 
+                                       style="border-radius: 8px; background-color: #071952;"> Gambar</a>
+                                @endif
+                                <button class="btn btn-danger btn-sm" type="submit" 
+                                        style="border-radius: 6px;">Hapus</button>
                             </form>
                         </li>
                     @empty

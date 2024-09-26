@@ -32,6 +32,6 @@
     </form>
 
     <!-- Tombol Kembali -->
-    <a href="{{route('tasks.index', $task->id)}}" class="btn btn-secondary mt-3 d-block text-center" style="border-radius: 8px; padding: 10px 0;">Kembali Ke Daftar Tugas</a>
+    <a href="{{route('tasks.show', $task->id)}}" class="btn btn-secondary mt-3 d-block text-center" style="border-radius: 8px; padding: 10px 0;">Kembali Ke Sub Tugas</a>
 </div>
 @endsection
