@@ -34,7 +34,7 @@
 </head>
 <body class="gray">
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm" style="background: linear-gradient(135deg, rgba(7, 25, 82, 0.85), rgba(113, 132, 240, 0.85));" >
+        <nav class="navbar navbar-expand-md shadow-sm" style="background: #242424" >
             <div class="container" >
                 @guest
                 <a class="navbar-brand text-white" href="{{ url('/') }}" >

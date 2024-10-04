@@ -4,7 +4,7 @@
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="fw-bold mb-4" style="color: #071952;"><center>{{ __('Login') }}</center></h1>
+            <h1 class="fw-bold mb-4" style="color: #000000;"><center>{{ __('Login') }}</center></h1>
             <div class="card shadow-sm">
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -52,7 +52,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn text-white" style="background-color: #071952; border-radius: 8px;">
+                                <button type="submit" class="btn text-white" style="background-color: #0f1117; border-radius: 8px;">
                                     {{ __('Login') }}
                                 </button>
 
